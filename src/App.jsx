@@ -1,9 +1,9 @@
-import { Outlet } from 'react-router-dom'
-import { NavBar } from './components/NavBar'
+import { Outlet } from "react-router-dom";
+import { NavBar } from "./components/NavBar";
 
 function App() {
   return (
-    <div className='flex-1 bg-slate-950 text-white'>
+    <div className="flex-1 bg-slate-950 text-white">
       {/* O Navbar aparecerá em todas as páginas */}
       <NavBar />
 
@@ -12,8 +12,7 @@ function App() {
         <Outlet />
       </main>
     </div>
-  )
+  );
 }
 
-export default App
-
+export default App;
