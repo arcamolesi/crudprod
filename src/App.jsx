@@ -1,49 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Outlet } from 'react-router-dom'
+import { NavBar } from './components/NavBar'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
+    <div className='flex-1 bg-slate-950 text-white'>
+      {/* O Navbar aparecerá em todas as páginas */}
+      <NavBar />
 
-
-    <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
-       <h1 class="bg-sky-500" text-gray-600>Olá Mundo </h1>
-        <h2 className="text-2xl font-bold text-gray-800">Tailwind Card</h2>
-        <p className="text-gray-600 mt-3">
-            This is a simple card layout built with Tailwind CSS.
-        </p>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-            Learn More
-        </button>
+      {/* A tag 'main' com padding é onde o conteúdo da página será renderizado */}
+      <main className="container mx-auto p-4">
+        <Outlet />
+      </main>
     </div>
-
-    // <>
-    //   <div>
-    //     <h1>Olá Mundo </h1>
-    //     <a href="https://vite.dev" target="_blank">
-    //       <img src={viteLogo} className="logo" alt="Vite logo" />
-    //     </a>
-    //     <a href="https://react.dev" target="_blank">
-    //       <img src={reactLogo} className="logo react" alt="React logo" />
-    //     </a>
-    //   </div>
-    //   <h1>Vite + React</h1>
-    //   <div className="card">
-    //     <button onClick={() => setCount((count) => count + 1)}>
-    //       count is {count}
-    //     </button>
-    //     <p>
-    //       Edit <code>src/App.jsx</code> and save to test HMR
-    //     </p>
-    //   </div>
-    //   <p className="read-the-docs">
-    //     Click on the Vite and React logos to learn more
-    //   </p>
-    // </>
   )
 }
 
 export default App
+
