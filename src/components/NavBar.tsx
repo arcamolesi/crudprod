@@ -5,7 +5,7 @@ export function NavBar() {
         <div className="container mx-auto">
             <Link to={"/"}> Inicio </Link>
             <Link to={"/about"}> Sobre </Link>
-
+            <Link to={"/produtos"}>Produtos</Link>
         </div>
     </nav>;
 }

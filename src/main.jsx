@@ -11,6 +11,8 @@ import App from './App.jsx'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 
+import ProdutoIndex from'./pages/produtos/ProdutoIndex.jsx'
+
 
 // Crie o roteador
 const router = createBrowserRouter([
@@ -26,6 +28,10 @@ const router = createBrowserRouter([
         path: "about",
         element: <About />, // Rota filha: /about
       },
+    {
+       path: "produtos", 
+       element: <ProdutoIndex/>
+    },
 
     ],
   },
