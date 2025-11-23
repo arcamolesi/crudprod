@@ -30,6 +30,19 @@ function ProdutoIndex() {
     <div>
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Manter Produtos</h1>
+        <Link
+          to="/produtos/create"
+          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Novo Produto
+        </Link>
+        <Link
+          to="/produtos/details/3"
+          to="/produtos/details/3"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Detalhes
+        </Link>
       </div>
 
       <div className="overflow-x-auto">
