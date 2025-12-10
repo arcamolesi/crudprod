@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../service/api";
+import { FaPlus, FaEdit, FaInfoCircle, FaTrash } from "react-icons/fa";
 
 function ProdutoIndex() {
   const [produtos, setProdutos] = useState([]);
@@ -22,6 +23,21 @@ function ProdutoIndex() {
     fetchProdutos();
   }, []);
 
+  async function handleDelete(id) {
+    if (!window.confirm(`Tem certeza que deseja remover o produto ${id}?`)) {
+      return;
+    }
+    try {
+      await api.delete(`/produtos/${id}`);
+      // Atualiza a lista de produtos removendo o item deletado
+      setProdutos(produtos.filter((produto) => produto.id !== id));
+      alert("Produto removido com sucesso!");
+    } catch (error) {
+      console.error("Erro ao remover produto:", error);
+      alert("Erro ao remover produto.");
+    }
+  }
+
   if (loading) {
     return <p>Carregando produtos...</p>;
   }
@@ -34,14 +50,7 @@ function ProdutoIndex() {
           to="/produtos/create"
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
         >
-          Novo Produto
-        </Link>
-        <Link
-          to="/produtos/details/3"
-          to="/produtos/details/3"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Detalhes
+          <FaPlus />
         </Link>
       </div>
 
@@ -59,6 +68,9 @@ function ProdutoIndex() {
             </th>
             <th className="py-2 px-4 border-b border-slate-700 text-left">
               Valor
+            </th>
+            <th className="py-2 px-4 border-b border-slate-700 text-left">
+              Ações
             </th>
           </thead>
           <tbody>
@@ -78,6 +90,29 @@ function ProdutoIndex() {
                     style: "currency",
                     currency: "BRL",
                   })}
+                </td>
+                <td className="py-2 px-4 border-b border-slate-700">
+                  <Link
+                    to={`/produtos/edit/${produto.id}`}
+                    className="bg-amber-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded mr-2 inline-flex items-center gap-1"
+                  >
+                    <FaEdit />
+                  </Link>
+
+                  <Link
+                    to={`/produtos/details/${produto.id}`}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded mr-2 inline-flex items-center gap-1"
+                  >
+                    <FaInfoCircle /> {/* Detalhes */}
+                  </Link>
+
+                  <button
+                    onClick={() => handleDelete(produto.id)}
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded inline-flex items-center gap-1"
+                  >
+                    <FaTrash /> {/* Remover */}
+                  </button>
+
                 </td>
               </tr>
             ))}

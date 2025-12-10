@@ -13,7 +13,7 @@ import About from "./pages/About.jsx";
 
 import ProdutoIndex from "./pages/produtos/ProdutoIndex.jsx";
 import ProdutoForm from "./pages/produtos/ProdutoForm.jsx";
-
+import ProdutoDetails from "./pages/produtos/ProdutoDetails.jsx";
 
 // Crie o roteador
 const router = createBrowserRouter([
@@ -31,14 +31,20 @@ const router = createBrowserRouter([
       },
       {
         path: "produtos",
-        element: <ProdutoIndex/>,
+        element: <ProdutoIndex />,
       },
       {
         path: "produtos/create",
-        element: <ProdutoForm/>
+        element: <ProdutoForm />,
       },
-
-
+      {
+        path: "produtos/edit/:id",
+        element: <ProdutoForm />,
+      },
+      {
+        path: "produtos/details/:id",
+        element: <ProdutoDetails />,
+      },
     ],
   },
 ]);

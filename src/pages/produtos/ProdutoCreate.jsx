@@ -5,7 +5,7 @@ import api from "../../service/api";
 const inputClassName =
   "bg-slate-800 border border-slate-700 rounded-lg p-2 w-full text-white";
 
-function ProdutoForm() {
+function ProdutoCreate() {
   const [produto, setProduto] = useState({
     descricao: "",
     quantidade: 0,
@@ -13,28 +13,8 @@ function ProdutoForm() {
   });
 
   const [loading, setLoading] = useState(false);
-  const { id } = useParams(); // pega o valor do id que veio lá do /edit/:id do produto index
-  const navigate = useNavigate();
-  const isEditing = Boolean(id);
 
-  //se tem um id eu recupero os valores, caso contrário, fica novo, zerado
-  useEffect(() => {
-    if (isEditing) {
-      setLoading(true);
-      api
-        .get(`/produtos/${id}`)
-        .then((response) => {
-          setProduto(response.data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Erro ao buscar produto para edição:", error);
-          setLoading(false);
-          alert("Erro ao carregar dados do produto.");
-          navigate("/produtos");
-        });
-    }
-  }, [id, isEditing, navigate]);
+  const navigate = useNavigate();
 
   function handleChange(e) {
     const { name, value, type } = e.target;
@@ -50,13 +30,13 @@ function ProdutoForm() {
     e.preventDefault();
     setLoading(true);
 
-    const method = isEditing ? "put" : "post";
-    const url = isEditing ? `/produtos/${id}` : "/produtos";
-    const dataToSend = isEditing ? { ...produto, id: parseInt(id) } : produto;
+    const method = "post";
+    const url = "/produtos";
+    const dataToSend = produto;
 
     try {
       await api[method](url, dataToSend);
-      alert(`Produto ${isEditing ? 'atualizado' : 'criado'} com sucesso!`);
+      alert("Produto Inserido com Sucesso...");
       navigate("/produtos"); // redireciona a página para o local desejado, lista de produtos
     } catch (error) {
       console.error("Erro ao salvar produto: ", error);
@@ -67,9 +47,7 @@ function ProdutoForm() {
   }
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">
-        {isEditing ? "Editar Produto" : "Novo Produto"}
-      </h1>
+      <h1>Inserir Produtos</h1>
       <form onSubmit={handleSubmit} className="space-y-4 max-w-lg">
         <div>
           <label htmlFor="descricao" className="block text-sm font-medium mb-1">
@@ -79,7 +57,7 @@ function ProdutoForm() {
             type="text"
             id="descricao"
             name="descricao"
-            value={produto.descricao}
+            value={produto.descriao}
             onChange={handleChange}
             className={inputClassName}
             required
@@ -139,4 +117,4 @@ function ProdutoForm() {
   );
 }
 
-export default ProdutoForm;
+export default ProdutoCreate;
